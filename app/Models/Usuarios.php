@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Usuarios extends Model
 {
@@ -16,6 +17,19 @@ class Usuarios extends Model
     protected $fillable = [
         'cedula','nombres','apellidos','direccion','celular',
         'telefono','email','titulo','horario','contacto_emergencia',
-        'clave','permisos'
+        'clave','permisos','rol'
     ];
+
+    /**
+     * get especialidad in doctor
+     */
+    public static function allWhitEspecialidades(string $cedula) {
+       $data = DB::table('usuarios')
+        ->join('usuarios_especialidades','usuarios_especialidades.cedula_user','=','usuarios.cedula')
+        ->join('especialidades','especialidades.id','=','usuarios_especialidades.id_especialidad')
+        ->where('usuarios.cedula',$cedula)
+        ->get();
+
+        return $data;
+    }
 }

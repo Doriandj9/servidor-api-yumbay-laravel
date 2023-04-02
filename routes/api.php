@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Especialidades;
 use App\Http\Controllers\Usuarios;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,3 +22,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/aut',Usuarios::class . '@index')->name('aut');
 Route::post('/aut',Usuarios::class . '@validation');
+Route::get('/especialidades',Especialidades::class . '@index');

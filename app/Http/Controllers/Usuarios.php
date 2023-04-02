@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Usuarios as ModelsUsuarios;
 use App\Utils\Autentication;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -31,19 +32,21 @@ class Usuarios extends Controller
         $clave = $request->input('clave');
         $rol = $request->input('rol');
         try {
-            if(Autentication::verifyCredential($cedula,$clave)){
+            $playload = Autentication::verifyCredential($cedula,$clave,$rol);
+            if($playload){
 
                 return response()->json(
                     [
                         'ident' => 1,
-                        'mensaje' => 'sadas'
+                        'body' => $playload
                     ]
                     );
             }
+            throw new ModelNotFoundException();
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             return response()->json([
                 'ident' => 0,
-                'mensaje' => 'Credenciales incorrectas'
+                'mensaje' => 'Datos erroneos, cédula o contraseña incorrectos.'
             ]);
         }
 
