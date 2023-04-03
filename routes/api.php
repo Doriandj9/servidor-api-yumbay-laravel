@@ -22,4 +22,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/aut',Usuarios::class . '@index')->name('aut');
 Route::post('/aut',Usuarios::class . '@validation');
+Route::post('/add/user/{rol}',Usuarios::class . '@insertNewUser');
 Route::get('/especialidades',Especialidades::class . '@index');
+
