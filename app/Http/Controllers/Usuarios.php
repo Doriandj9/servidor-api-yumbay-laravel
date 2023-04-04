@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserPostRequest;
 use App\Models\Usuarios as ModelsUsuarios;
+use App\Models\UsuariosEspecialidades;
 use App\Utils\Autentication;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -80,33 +81,43 @@ class Usuarios extends Controller
                     'direccion' => $request->get('direccion'),
                     'telefono' => $request->get('telefono'),
                     'celular'=> $request->get('celular'),
-                    'correo' => $request->get('correo'),
+                    'email' => $request->get('correo'),
                     'horario' => $request->get('horario'),
-                    'numero_emergencia' =>  $request->get('numero_emergencia'),
+                    'contacto_emergencia' =>  $request->get('numero_emergencia'),
+                    'clave' => password_hash($request->get('cedula'),PASSWORD_DEFAULT),
                     'rol' => $rolIn,
                     'permisos' => intval($permisos)
                 ];
                 //create
+                ModelsUsuarios::create($data);
                 //code
-                $das = [];
                 foreach($especialidades as $es){
                     $dataEs = [
                         'cedula_user' => $request->get('cedula'),
                         'id_especialidad' => intval($es)
                     ];
-                    array_push($das, $dataEs);
+                    UsuariosEspecialidades::create($dataEs);
                 }
-                
-                return response($das);
+
+                return response()
+                ->json([
+                    'ident' => 1,
+                    'mensaje' => 'Se ingreso correctamente los datos.'
+                ],201);
             } catch (\PDOException $er) {
-                //throw $th;
+                return response()
+                ->json([
+                    'ident' => 0,
+                    'mensaje' => $er->getMessage(),
+                    'atributos' => $er->errorInfo
+                ]);
             }
         } catch (ValidationException $e) {
             //throw $th;
             return response()->json([
                     'ident' => 0,
                     'mensaje' => $e->getMessage(),
-                    'errores' => $e->errors()   
+                    'errores' => $e->errors()
                 ]
                 );
         }

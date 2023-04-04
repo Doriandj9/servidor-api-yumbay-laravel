@@ -22,7 +22,7 @@ class UserPostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'cedula' => 'required',
+            'cedula' => ['required','regex:/(?<province>^[01][1-9]|[2][0-4]|30|10|20)(?<tercer>[0-6])(?<number>[0-9]{7})\b/'],
             'nombres' => 'required',
             'apellidos' => 'required',
             'direccion' => 'required',
@@ -43,6 +43,7 @@ class UserPostRequest extends FormRequest
     {
         return [
             'cedula.required' => 'Se requiere el número de cédula.',
+            'cedula.regex' => 'Ingrese un número de cédula valido.',
             'nombres.required' => 'Se requiere los nombres.',
             'apellidos.required' => 'Se requiere los apellidos.',
             'direccion.required' => 'Se requiere la dirección.',
@@ -54,5 +55,5 @@ class UserPostRequest extends FormRequest
         ];
     }
 
-    
+
 }

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('cedula_user',10)->nullable();
             $table->integer('id_especialidad')->nullable();
+            $table->timestamps();
         });
     }
 

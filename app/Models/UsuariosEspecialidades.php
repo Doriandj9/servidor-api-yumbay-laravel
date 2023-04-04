@@ -9,4 +9,5 @@ class UsuariosEspecialidades extends Model
     protected $fillable = [
         'cedula_user','id_especialidad'
     ];
+    
 }
