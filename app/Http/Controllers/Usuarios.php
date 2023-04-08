@@ -65,38 +65,67 @@ class Usuarios extends Controller
 
         try {
             //code...
-           $validator = Validator::make($request->all(),$requestS->rules(),$requestS->messages());
+            $validator = null;
+            if($rol === 'recepcionista'){
+                $validator = Validator::make($request->all(),$requestS->rules2(),$requestS->messages());
+
+            }else{
+                $validator = Validator::make($request->all(),$requestS->rules(),$requestS->messages());
+            }
             if($validator->fails()){
                 throw new ValidationException($validator);
             }
+
             try {
                 $opRol = preg_split('/:/',$roles[$rol]);
                 $rolIn = $opRol[0];
                 $permisos = $opRol[1];
-                $especialidades =  preg_split('/,/', $request->get('especialidades'));
-                $data = [
-                    'cedula' => $request->get('cedula'),
-                    'nombres' => $request->get('nombres'),
-                    'apellidos' => $request->get('apellidos'),
-                    'direccion' => $request->get('direccion'),
-                    'telefono' => $request->get('telefono'),
-                    'celular'=> $request->get('celular'),
-                    'email' => $request->get('correo'),
-                    'horario' => $request->get('horario'),
-                    'contacto_emergencia' =>  $request->get('numero_emergencia'),
-                    'clave' => password_hash($request->get('cedula'),PASSWORD_DEFAULT),
-                    'rol' => $rolIn,
-                    'permisos' => intval($permisos)
-                ];
+                $data = null;
+                $especialidades = null;
+                if($rol === 'recepcionista'){
+                    $data = [
+                        'cedula' => $request->get('cedula'),
+                        'nombres' => $request->get('nombres'),
+                        'apellidos' => $request->get('apellidos'),
+                        'direccion' => $request->get('direccion'),
+                        'telefono' => $request->get('telefono'),
+                        'titulo' => $request->get('titulo'),
+                        'celular'=> $request->get('celular'),
+                        'email' => $request->get('correo'),
+                        'horario' => $request->get('horario'),
+                        'contacto_emergencia' =>  $request->get('numero_emergencia'),
+                        'clave' => password_hash($request->get('cedula'),PASSWORD_DEFAULT),
+                        'rol' => $rolIn,
+                        'permisos' => intval($permisos)
+                    ];
+                }else{
+                    $especialidades =  preg_split('/,/', $request->get('especialidades'));
+                    $data = [
+                        'cedula' => $request->get('cedula'),
+                        'nombres' => $request->get('nombres'),
+                        'apellidos' => $request->get('apellidos'),
+                        'direccion' => $request->get('direccion'),
+                        'telefono' => $request->get('telefono'),
+                        'celular'=> $request->get('celular'),
+                        'email' => $request->get('correo'),
+                        'horario' => $request->get('horario'),
+                        'contacto_emergencia' =>  $request->get('numero_emergencia'),
+                        'clave' => password_hash($request->get('cedula'),PASSWORD_DEFAULT),
+                        'rol' => $rolIn,
+                        'permisos' => intval($permisos)
+                    ];
+                }
                 //create
                 ModelsUsuarios::create($data);
                 //code
-                foreach($especialidades as $es){
-                    $dataEs = [
-                        'cedula_user' => $request->get('cedula'),
-                        'id_especialidad' => intval($es)
-                    ];
-                    UsuariosEspecialidades::create($dataEs);
+                if($rol === 'medico'){
+                    foreach($especialidades as $es){
+                        $dataEs = [
+                            'cedula_user' => $request->get('cedula'),
+                            'id_especialidad' => intval($es)
+                        ];
+                        UsuariosEspecialidades::create($dataEs);
+                    }
                 }
 
                 return response()

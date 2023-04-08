@@ -50,10 +50,25 @@ class UserPostRequest extends FormRequest
             'correo.required' => 'Se require un correo electronico.',
             'correo.email' => 'El correo electronico no es valido.',
             'especialidades.required' => 'Se requiere especialidades',
+            'titulo.required' => 'Se requiere un titulo',
             'horario.required' => 'Se require un horario',
             'numero_emergencia.required' => 'Se requiere el número de emergencia',
         ];
     }
 
+    public function rules2() {
+        return [
+            'cedula' => ['required','regex:/(?<province>^[01][1-9]|[2][0-4]|30|10|20)(?<tercer>[0-6])(?<number>[0-9]{7})\b/'],
+            'nombres' => 'required',
+            'apellidos' => 'required',
+            'direccion' => 'required',
+            'telefono' => 'nullable',
+            'celular'=> 'nullable',
+            'correo' => 'required|email',
+            'titulo' => 'required',
+            'horario' => 'required',
+            'numero_emergencia' => 'required'
+        ];
+    }
 
 }
