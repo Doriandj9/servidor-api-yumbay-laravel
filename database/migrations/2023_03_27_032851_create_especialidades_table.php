@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('nombre');
             $table->text('descripcion');
             $table->text('img');
+            $table->text('horario');
             $table->timestamps();
         });
 
@@ -39,11 +40,15 @@ return new class extends Migration
     {
         $data = [[
             'nombre' => 'Odontologia',
-            'descripcion' => 'Sirve para los dientes'
+            'descripcion' => 'Sirve para los dientes',
+            'img' => '',
+            'horario' => 'LUNES-MARTES-MIERCOLES-JUEVES-VIERNES|8:00-18:00'
         ],
         [
             'nombre' => 'Medicina General',
-            'descripcion' => 'Sirve para todo'
+            'descripcion' => 'Sirve para todo',
+            'img' => '',
+            'horario' => 'LUNES-MARTES-MIERCOLES-JUEVES-VIERNES|8:00-18:00'
         ]
     ];
 

@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('telefono')->nullable(true);
             $table->string('email')->nullable(false);
             $table->string('titulo')->nullable(true);
-            $table->string('horario')->nullable(false);
             $table->string('contacto_emergencia', 10)->nullable(false);
             $table->string('clave')->nullable(false);
             $table->integer('permisos')->nullable(false);
@@ -57,7 +56,6 @@ return new class extends Migration
             'celular' => '0989960587',
             'email' => 'dorian@admin.es',
             'titulo' => 'Ing. Software',
-            'horario' => 'Lunes, Martes',
             'contacto_emergencia' => '0985562587',
             'clave' => password_hash('12345', PASSWORD_DEFAULT),
             'permisos' => 16,

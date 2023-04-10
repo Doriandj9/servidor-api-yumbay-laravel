@@ -11,4 +11,7 @@
     <input type="text" name="rol" value="{{old('rol')}}">
     <button type="submit">Enviar</button>
    </form>
+   <P>
+    {{ asset('css/app.css') }}
+   </P>
 @endsection
