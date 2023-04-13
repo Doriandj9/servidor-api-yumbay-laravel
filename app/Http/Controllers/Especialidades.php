@@ -29,4 +29,14 @@ class Especialidades extends Controller
         }
 
     }
+
+    public function add(Request $request){
+
+        if($request->hasFile('imagen')){
+            return response('',200);
+        }
+
+        return response('',404);
+
+    }
 }
