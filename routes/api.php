@@ -24,4 +24,5 @@ Route::post('/aut',Usuarios::class . '@validation');
 Route::post('/add/user/{rol}',Usuarios::class . '@insertNewUser');
 Route::get('/especialidades',Especialidades::class . '@index');
 Route::post('/add/especialidades',Especialidades::class . '@add');
-
+Route::get('/users/medicos',Usuarios::class . '@getUserMedicos');
+Route::get('/users/medicos/especialidad/{id}',Usuarios::class . '@getUserMedicosForEspecialdiad');

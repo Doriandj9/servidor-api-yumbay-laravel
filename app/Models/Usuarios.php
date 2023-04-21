@@ -16,7 +16,7 @@ class Usuarios extends Model
 
     protected $fillable = [
         'cedula','nombres','apellidos','direccion','celular',
-        'telefono','email','titulo','contacto_emergencia',
+        'telefono','email','titulo','contacto_emergencia','horario',
         'clave','permisos','rol'
     ];
 
@@ -30,6 +30,16 @@ class Usuarios extends Model
         ->where('usuarios.cedula',$cedula)
         ->get();
 
+        return $data;
+    }
+
+    public static function allMedicosForEspecialidad (string $idEspecialidad) {
+        $data = DB::table('especialidades')
+        ->join('usuarios_especialidades','usuarios_especialidades.id_especialidad','=','especialidades.id')
+        ->join('usuarios','usuarios_especialidades.cedula_user','=','usuarios.cedula')
+        ->where('especialidades.id',$idEspecialidad)
+        ->get(['usuarios.id as id','usuarios.nombres as nombres','usuarios.apellidos as apellidos',
+        'usuarios.cedula as cedula','usuarios.horario']);
         return $data;
     }
 }

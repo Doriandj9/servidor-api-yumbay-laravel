@@ -30,7 +30,10 @@ class UserPostRequest extends FormRequest
             'celular'=> 'nullable',
             'correo' => 'required|email',
             'especialidades' => 'required',
-            'horario' => 'required',
+            'imagen' => 'required',
+            'dias' => 'required',
+            'hora_ingreso' => 'required',
+            'hora_salida' => 'required',
             'numero_emergencia' => 'required'
         ];
     }
@@ -51,7 +54,10 @@ class UserPostRequest extends FormRequest
             'correo.email' => 'El correo electronico no es valido.',
             'especialidades.required' => 'Se requiere especialidades',
             'titulo.required' => 'Se requiere un titulo',
-            'horario.required' => 'Se require un horario',
+            'dias.required' => 'Se require un horario',
+            'hora_ingreso.required' => 'Se require una hora de ingreso',
+            'hora_salida.required' => 'Se require un hora de salida',
+            'imagen.required' => 'Se require un imagen',
             'numero_emergencia.required' => 'Se requiere el número de emergencia',
         ];
     }
@@ -66,7 +72,6 @@ class UserPostRequest extends FormRequest
             'celular'=> 'nullable',
             'correo' => 'required|email',
             'titulo' => 'required',
-            'horario' => 'required',
             'numero_emergencia' => 'required'
         ];
     }

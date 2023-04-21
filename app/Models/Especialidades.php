@@ -10,6 +10,6 @@ class Especialidades extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nombre', 'descripcion','img','horario'
+        'nombre', 'descripcion','img',
     ];
 }

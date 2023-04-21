@@ -2,7 +2,7 @@
 @section('title',$viewData['title'])
 @section('content')
 @php 
-    var_dump($errors);
+    var_dump($especialidades);
 @endphp
    <form action="{{ route('aut') }}" method="post">
     @csrf

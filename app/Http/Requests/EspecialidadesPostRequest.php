@@ -24,10 +24,7 @@ class EspecialidadesPostRequest extends FormRequest
         return [
             'nombre' => 'required',
             'descripcion' => 'required',
-            'imagen' => 'required',
-            'dias' => 'required',
-            'hora_ingreso' => 'required',
-            'hora_salida' => 'required'
+            'imagen' => 'required'
         ];
     }
     /**
@@ -40,10 +37,7 @@ class EspecialidadesPostRequest extends FormRequest
         return [
             'nombre.required' => 'Se require un nombre de especialidad',
             'descripcion.required' => 'Se requiere una descripción de la especialidad',
-            'imagen.required' => 'Se require una imagen',
-            'dias.required' => 'Se require los días laborables',
-            'hora_ingreso.required' => 'Se require la hora de ingresos',
-            'hora_salida.required' => 'Se require la hora de salida'
+            'imagen.required' => 'Se require una imagen'
         ];
     }
 }

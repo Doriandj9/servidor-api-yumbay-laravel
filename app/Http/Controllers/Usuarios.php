@@ -23,7 +23,6 @@ class Usuarios extends Controller
 
     public function index(){
         $usuarios = ModelsUsuarios::all();
-
         return response()->json([
             'usuarios' => $usuarios
         ]);
@@ -71,7 +70,12 @@ class Usuarios extends Controller
 
             }else{
                 $validator = Validator::make($request->all(),$requestS->rules(),$requestS->messages());
+
+                if(!$request->hasFile('imagen')){
+                    throw new ValidationException($validator);
+                }
             }
+
             if($validator->fails()){
                 throw new ValidationException($validator);
             }
@@ -92,11 +96,11 @@ class Usuarios extends Controller
                         'titulo' => $request->get('titulo'),
                         'celular'=> $request->get('celular'),
                         'email' => $request->get('correo'),
-                        'horario' => $request->get('horario'),
+                        'horario' => 'LUNES/VIERNES',
                         'contacto_emergencia' =>  $request->get('numero_emergencia'),
                         'clave' => password_hash($request->get('cedula'),PASSWORD_DEFAULT),
                         'rol' => $rolIn,
-                        'permisos' => intval($permisos)
+                        'permisos' => ModelsUsuarios::RECEPCIONISTA
                     ];
                 }else{
                     $especialidades =  preg_split('/,/', $request->get('especialidades'));
@@ -108,11 +112,12 @@ class Usuarios extends Controller
                         'telefono' => $request->get('telefono'),
                         'celular'=> $request->get('celular'),
                         'email' => $request->get('correo'),
-                        'horario' => $request->get('horario'),
+                        'horario' => $request->get('dias') . '|' . $request->get('hora_ingreso')
+                        . '-' . $request->get('hora_salida'),
                         'contacto_emergencia' =>  $request->get('numero_emergencia'),
                         'clave' => password_hash($request->get('cedula'),PASSWORD_DEFAULT),
                         'rol' => $rolIn,
-                        'permisos' => intval($permisos)
+                        'permisos' => ModelsUsuarios::DOCTOR
                     ];
                 }
                 //create
@@ -150,5 +155,20 @@ class Usuarios extends Controller
                 ]
                 );
         }
+    }
+
+    public function getUserMedicos(){
+        $medicos = ModelsUsuarios::where('permisos',ModelsUsuarios::DOCTOR)->get();
+        return response()->json([
+            'ident' => 1,
+            'data' => $medicos
+        ]);
+    }
+    public function getUserMedicosForEspecialdiad($id){
+        $medicos = ModelsUsuarios::allMedicosForEspecialidad($id);
+        return response()->json([
+            'ident' => 1,
+            'data' => $medicos
+        ]);
     }
 }
