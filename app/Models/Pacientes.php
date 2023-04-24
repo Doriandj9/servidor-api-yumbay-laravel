@@ -9,7 +9,7 @@ class Pacientes extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'cedula','nombres','apellidos','direccion','celular',
+        'cedula','nombres','apellidos','direccion','celular','fecha_nacimiento',
         'email','clave'
     ];
 }

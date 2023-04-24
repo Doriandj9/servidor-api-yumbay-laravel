@@ -22,7 +22,8 @@ class Pacientes extends Controller
             'apellidos' => $request->get('apellidos'),
             'direccion' => $request->get('direccion'),
             'celular' => $request->get('celular'),
-            'email' => $request->get('email'),
+            'fecha_nacimiento' => $request->get('fecha_nacimiento'),
+            'email' => $request->get('correo'),
             'clave' => $request->get('clave')
         ];
         try {

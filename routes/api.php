@@ -28,8 +28,8 @@ Route::get('/especialidades',Especialidades::class . '@index');
 Route::post('/add/especialidades',Especialidades::class . '@add');
 Route::get('/users/medicos',Usuarios::class . '@getUserMedicos');
 Route::get('/users/medicos/especialidad/{id}',Usuarios::class . '@getUserMedicosForEspecialdiad');
-Route::get('/citas/medico/{cedula}/{fecha}',CitasMedicas::class . '@forEspecialiadAndMedico');
+Route::get('/citas/medico/{cedula}/{fecha}/{especialidad}',CitasMedicas::class . '@forEspecialiadAndMedico');
 Route::get('/info/paciente/{cedula}',Pacientes::class . '@hashPacienteOrInsert');
-
+Route::post('/cita-medica/save',CitasMedicas::class . '@save');
 
 

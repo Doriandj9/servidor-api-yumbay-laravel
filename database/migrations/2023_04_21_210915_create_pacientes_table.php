@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('apellidos');
             $table->text('direccion');
             $table->string('celular',10);
+            $table->date('fecha_nacimiento');
             $table->text('email');
             $table->text('clave');
             $table->timestamps();

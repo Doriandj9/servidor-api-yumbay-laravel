@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('citas_medicas', function (Blueprint $table) {
             $table->id();
             $table->date('fecha');
-            $table->timestamp('hora_inicio',6);
-            $table->timestamp('hora_final',6);
+            $table->string('hora',11);
             $table->boolean('pendiente');
             $table->integer('id_especialidad');
             $table->string('cedula_paciente',10);
