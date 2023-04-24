@@ -36,7 +36,6 @@ class Usuarios extends Controller
         try {
             $playload = Autentication::verifyCredential($cedula,$clave,$rol);
             if($playload){
-
                 return response()->json(
                     [
                         'ident' => 1,

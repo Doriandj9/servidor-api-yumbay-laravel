@@ -23,11 +23,12 @@ class Usuarios extends Model
     /**
      * get especialidad in doctor
      */
-    public static function allWhitEspecialidades(string $cedula) {
+    public static function allWhitEspecialidades(string $cedula,$idEspecialidad) {
        $data = DB::table('usuarios')
         ->join('usuarios_especialidades','usuarios_especialidades.cedula_user','=','usuarios.cedula')
         ->join('especialidades','especialidades.id','=','usuarios_especialidades.id_especialidad')
         ->where('usuarios.cedula',$cedula)
+        ->where('usuarios_especialidades.id_especialidad',$idEspecialidad)
         ->get();
 
         return $data;
