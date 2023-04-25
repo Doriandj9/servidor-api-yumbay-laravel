@@ -24,7 +24,7 @@ class Pacientes extends Controller
             'celular' => $request->get('celular'),
             'fecha_nacimiento' => $request->get('fecha_nacimiento'),
             'email' => $request->get('correo'),
-            'clave' => $request->get('clave')
+            'clave' => '1234'
         ];
         try {
             ModelsPacientes::create($data);
