@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('horario',120);
             $table->string('contacto_emergencia', 10)->nullable(false);
             $table->string('clave')->nullable(false);
+            $table->text('imagen')->nullable(true);
             $table->integer('permisos')->nullable(false);
             $table->text('rol')->nullable(false);
             $table->timestamps();

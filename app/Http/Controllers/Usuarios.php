@@ -8,6 +8,7 @@ use App\Models\UsuariosEspecialidades;
 use App\Utils\Autentication;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
@@ -85,6 +86,7 @@ class Usuarios extends Controller
                 $permisos = $opRol[1];
                 $data = null;
                 $especialidades = null;
+                $nameImg = $request->get('cedula'). '.' . $request->file('imagen')->extension();
                 if($rol === 'recepcionista'){
                     $data = [
                         'cedula' => $request->get('cedula'),
@@ -95,6 +97,7 @@ class Usuarios extends Controller
                         'titulo' => $request->get('titulo'),
                         'celular'=> $request->get('celular'),
                         'email' => $request->get('correo'),
+                        'imagen' => $nameImg,
                         'horario' => 'LUNES/VIERNES',
                         'contacto_emergencia' =>  $request->get('numero_emergencia'),
                         'clave' => password_hash($request->get('cedula'),PASSWORD_DEFAULT),
@@ -111,13 +114,20 @@ class Usuarios extends Controller
                         'telefono' => $request->get('telefono'),
                         'celular'=> $request->get('celular'),
                         'email' => $request->get('correo'),
+                        'titulo' => $request->get('Doctor'),
                         'horario' => $request->get('dias') . '|' . $request->get('hora_ingreso')
                         . '-' . $request->get('hora_salida'),
                         'contacto_emergencia' =>  $request->get('numero_emergencia'),
                         'clave' => password_hash($request->get('cedula'),PASSWORD_DEFAULT),
+                        'imagen' => $nameImg,
                         'rol' => $rolIn,
                         'permisos' => ModelsUsuarios::DOCTOR
                     ];
+                }
+                if(!Storage::disk('public')
+                ->put($nameImg,file_get_contents($request->file('imagen')->getRealPath())))
+                {
+                    throw new \PDOException('Error al intentar guardar la imagen');
                 }
                 //create
                 ModelsUsuarios::create($data);

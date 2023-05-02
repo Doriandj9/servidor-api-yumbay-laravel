@@ -31,5 +31,7 @@ Route::get('/users/medicos/especialidad/{id}',Usuarios::class . '@getUserMedicos
 Route::get('/citas/medico/{cedula}/{fecha}/{especialidad}',CitasMedicas::class . '@forEspecialiadAndMedico');
 Route::get('/info/paciente/{cedula}',Pacientes::class . '@hashPacienteOrInsert');
 Route::post('/cita-medica/save',CitasMedicas::class . '@save');
+Route::get('/agenda/cita-medica/{cedula}/{especialidad}',CitasMedicas::class . '@getForEspecialidad');
+
 
 

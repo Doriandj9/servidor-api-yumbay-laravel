@@ -59,4 +59,21 @@ class CitasMedicas extends Controller
             ]);
         }
     }
+
+    public function getForEspecialidad($cedula,$especialidad){
+        try{
+            $data = ModelsCitasMedicas::getDataForEspecialidadAndDoctor($cedula,intval($especialidad));
+            return response()
+            ->json([
+                'ident' => 1,
+                'data' => $data,
+            ]);
+        }catch(\PDOException $e){
+            return response()
+            ->json([
+                'ident' => 0,
+                'mensaje' => $e->getMessage(),
+            ]);
+        }
+    }
 }

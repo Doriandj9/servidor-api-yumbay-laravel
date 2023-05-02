@@ -26,6 +26,8 @@ class Autentication {
             if(count($dataEs) <= 0){
                 return false;
             }
+            $user->id_especialidad = $valor;
+            $user->nombre_especialidad = $dataEs->first()->nombre;
             return [
                 'permisos' => intval($dataEs->first()->permisos),
                 'playload' => $user,
