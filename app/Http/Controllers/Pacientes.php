@@ -27,7 +27,16 @@ class Pacientes extends Controller
             'clave' => '1234'
         ];
         try {
-            ModelsPacientes::create($data);
+            $paciente =ModelsPacientes::where('cedula',$request->get('cedula'))->first();
+            if($paciente){
+                return response()
+                ->json([
+                    'ident' => 1,
+                    'mensaje' => 'Se ingreso correctamente los datos'
+                ]);
+            }else{
+                ModelsPacientes::create($data);
+            }
             if($peticion){
                 return response()
                 ->json([

@@ -17,7 +17,7 @@ class Usuarios extends Model
     protected $fillable = [
         'cedula','nombres','apellidos','direccion','celular',
         'telefono','email','titulo','contacto_emergencia','horario',
-        'clave','permisos','rol'
+        'clave','permisos','rol','imagen'
     ];
 
     /**

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CitasMedicas;
 use App\Http\Controllers\Especialidades;
+use App\Http\Controllers\FichasMedicas;
 use App\Http\Controllers\Pacientes;
 use App\Http\Controllers\Usuarios;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,7 @@ Route::get('/citas/medico/{cedula}/{fecha}/{especialidad}',CitasMedicas::class .
 Route::get('/info/paciente/{cedula}',Pacientes::class . '@hashPacienteOrInsert');
 Route::post('/cita-medica/save',CitasMedicas::class . '@save');
 Route::get('/agenda/cita-medica/{cedula}/{especialidad}',CitasMedicas::class . '@getForEspecialidad');
+Route::post('/ficha-medica/save',FichasMedicas::class . '@save');
 
 
 
