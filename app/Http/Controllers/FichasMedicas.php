@@ -41,6 +41,8 @@ class FichasMedicas extends Controller
                     'estado_civil' => $request->get('estado_civil'),
                     'fecha_control' => $request->get('fecha'),
                     'hora_finalizacion' => $request->get('hora_finalizacion'),
+                    'unidad_operativa' => $request->get('unidad_operativa'),
+                    'id_especialidad' => intval($request->get('id_especialidad')),
                     'cedula_paciente' => $request->get('cedula')
                 ];
                 $dataHistoriaClinica = [
@@ -106,6 +108,25 @@ class FichasMedicas extends Controller
                 'ident' => 0,
                 'mensaje' => $e->getMessage(),
                 'errores' => $e->errors()
+            ]);
+        }
+    }
+
+    public function getForPaciente($cedula){
+        try{
+
+            $data = ModelsFichasMedicas::getForPaciente($cedula);
+            return response()
+            ->json([
+                'ident' => 1,
+                'data' => $data
+            ]);
+
+        }catch(\PDOException $e){
+            return response()
+            ->json([
+                'ident' => 0,
+                'mensaje' => $e->getMessage()
             ]);
         }
     }

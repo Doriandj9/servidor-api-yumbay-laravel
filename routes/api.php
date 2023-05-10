@@ -34,6 +34,7 @@ Route::get('/info/paciente/{cedula}',Pacientes::class . '@hashPacienteOrInsert')
 Route::post('/cita-medica/save',CitasMedicas::class . '@save');
 Route::get('/agenda/cita-medica/{cedula}/{especialidad}',CitasMedicas::class . '@getForEspecialidad');
 Route::post('/ficha-medica/save',FichasMedicas::class . '@save');
-
-
+Route::get('/citas-medicas/estado/{id}',CitasMedicas::class . '@updateState');
+Route::get('/doctor/{doctor}/pacientes/especialidad/{id}',Pacientes::class . '@getForEspecialidad');
+Route::get('/doctor/fichas/medicas/{cedula}',FichasMedicas::class . '@getForPaciente');
 

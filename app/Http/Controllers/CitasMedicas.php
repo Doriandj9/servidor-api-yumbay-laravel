@@ -76,4 +76,25 @@ class CitasMedicas extends Controller
             ]);
         }
     }
+
+    public function updateState($id){
+
+        try{
+            $citaMedica = ModelsCitasMedicas::find(intval(trim($id)));
+            $citaMedica->pendiente = false;
+            $citaMedica->save();
+
+            return response()
+            ->json([
+                'ident' => 1,
+                'mensaje' => 'Actualizado correctamente'
+            ]);
+        }catch(\PDOException $e){
+            return response()
+            ->json([
+                'ident' => 0,
+                'mensaje' => $e->getMessage()
+            ]);
+        }
+    }
 }

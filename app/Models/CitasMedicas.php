@@ -33,6 +33,7 @@ class CitasMedicas extends Model
         ->join('pacientes','pacientes.cedula','=','citas_medicas.cedula_paciente')
         ->where('usuarios.cedula','=',$cedula)
         ->where('citas_medicas.id_especialidad','=',$id_especialidad)
+        ->where('citas_medicas.pendiente','=',true)
         ->get(['citas_medicas.hora as horas',
         'citas_medicas.fecha as fecha',
         'pacientes.nombres as nombres',

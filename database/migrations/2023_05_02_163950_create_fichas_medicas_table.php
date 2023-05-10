@@ -25,6 +25,8 @@ return new class extends Migration
             $table->string('estado_civil',40);
             $table->date('fecha_control');
             $table->string('hora_finalizacion',10);
+            $table->text('unidad_operativa');
+            $table->integer('id_especialidad');
             $table->string('cedula_paciente',10);// foreig key -> pacientes
             $table->timestamps();
         });
