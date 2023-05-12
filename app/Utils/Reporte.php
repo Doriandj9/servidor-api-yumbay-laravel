@@ -11,6 +11,7 @@ class Reporte {
 
     public static function reporteInicial($fecha1=null,$fecha2=null,$especialidad)
     {
+        header('Access-Control-Allow-Origin: *');
         $data = null;
         if($fecha1 === '0' && $fecha2 === '0' && $especialidad === '0'){
             $data = CitasMedicas::getDataForReportAll();
