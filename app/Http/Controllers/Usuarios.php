@@ -99,7 +99,7 @@ class Usuarios extends Controller
                         'email' => $request->get('correo'),
                         'imagen' => $nameImg,
                         'horario' => 'LUNES/VIERNES',
-                        'contacto_emergencia' =>  $request->get('numero_emergencia'),
+                        'contacto_emergencia' =>  'ninguno',
                         'clave' => password_hash($request->get('cedula'),PASSWORD_DEFAULT),
                         'rol' => $rolIn,
                         'permisos' => ModelsUsuarios::RECEPCIONISTA

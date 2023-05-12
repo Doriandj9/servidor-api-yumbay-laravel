@@ -72,7 +72,6 @@ class UserPostRequest extends FormRequest
             'celular'=> 'nullable',
             'correo' => 'required|email',
             'titulo' => 'required',
-            'numero_emergencia' => 'required'
         ];
     }
 

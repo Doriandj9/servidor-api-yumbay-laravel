@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('email')->nullable(false);
             $table->string('titulo')->nullable(true);
             $table->string('horario',120);
-            $table->string('contacto_emergencia', 10)->nullable(false);
+            $table->string('contacto_emergencia', 10)->nullable(true);
             $table->string('clave')->nullable(false);
             $table->text('imagen')->nullable(true);
             $table->integer('permisos')->nullable(false);

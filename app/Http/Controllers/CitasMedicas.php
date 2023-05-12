@@ -6,6 +6,7 @@ use App\Http\Controllers\Pacientes as ControllersPacientes;
 use App\Models\CitasMedicas as ModelsCitasMedicas;
 use App\Models\Pacientes;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CitasMedicas extends Controller
 {
@@ -97,4 +98,27 @@ class CitasMedicas extends Controller
             ]);
         }
     }
+
+    public function getForPaciente($cedula){
+        try {
+            $citas_medicas = ModelsCitasMedicas::getOnlyPerson($cedula);
+            return response()
+            ->json([
+                'ident' => 1,
+                'data' => $citas_medicas
+            ]);
+        } catch (\PDOException $e) {
+            return response()
+            ->json([
+                'ident' => 0,
+                'mensaje' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function updateForPaciente($cedula){
+
+    }
+
+
 }

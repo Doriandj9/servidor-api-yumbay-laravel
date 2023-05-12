@@ -4,6 +4,7 @@ use App\Http\Controllers\CitasMedicas;
 use App\Http\Controllers\Especialidades;
 use App\Http\Controllers\FichasMedicas;
 use App\Http\Controllers\Pacientes;
+use App\Http\Controllers\Reportes;
 use App\Http\Controllers\Usuarios;
 use Illuminate\Support\Facades\Route;
 
@@ -37,4 +38,5 @@ Route::post('/ficha-medica/save',FichasMedicas::class . '@save');
 Route::get('/citas-medicas/estado/{id}',CitasMedicas::class . '@updateState');
 Route::get('/doctor/{doctor}/pacientes/especialidad/{id}',Pacientes::class . '@getForEspecialidad');
 Route::get('/doctor/fichas/medicas/{cedula}',FichasMedicas::class . '@getForPaciente');
-
+Route::get('/citas-medicas/agendadas/{cedula}',CitasMedicas::class . '@getForPaciente');
+Route::get('/reportes/{fechaI}/{fechaF}/{especialidad}',Reportes::class .'@reporte');
