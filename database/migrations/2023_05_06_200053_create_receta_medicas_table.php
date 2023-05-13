@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('usuarios_especialidades', function (Blueprint $table) {
+        Schema::create('receta_medicas', function (Blueprint $table) {
             $table->id();
-            $table->string('cedula_user',10)->nullable();
-            $table->integer('id_especialidad')->nullable();
+            $table->text('medicamentos_tratamiento');
             $table->timestamps();
         });
     }
@@ -24,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('usuarios_especialidades');
+        Schema::dropIfExists('receta_medica');
     }
 };

@@ -22,9 +22,10 @@ return new class extends Migration
             $table->string('telefono')->nullable(true);
             $table->string('email')->nullable(false);
             $table->string('titulo')->nullable(true);
-            $table->string('horario')->nullable(false);
-            $table->string('contacto_emergencia', 10)->nullable(false);
+            $table->string('horario',120);
+            $table->string('contacto_emergencia', 10)->nullable(true);
             $table->string('clave')->nullable(false);
+            $table->text('imagen')->nullable(true);
             $table->integer('permisos')->nullable(false);
             $table->text('rol')->nullable(false);
             $table->timestamps();
@@ -50,15 +51,15 @@ return new class extends Migration
         // Datos del administrador
 
         $data = [
-            'cedula' => '0250186665',
-            'nombres' => 'Dorian Josue',
-            'apellidos' => 'Armijos Gadvay',
-            'direccion' => 'San Miguel',
-            'celular' => '0989960587',
-            'email' => 'dorian@admin.es',
+            'cedula' => '0250194412',
+            'nombres' => 'Diana Mercedes',
+            'apellidos' => 'Yumbay Remache',
+            'direccion' => 'Santa Fe',
+            'celular' => '0981044784',
+            'email' => 'diana@admin.es',
             'titulo' => 'Ing. Software',
-            'horario' => 'Lunes, Martes',
-            'contacto_emergencia' => '0985562587',
+            'contacto_emergencia' => '0981044784',
+            'horario' => 'LUNES-MARTES|8:00-15:00',
             'clave' => password_hash('12345', PASSWORD_DEFAULT),
             'permisos' => 16,
             'rol' => 'Administrador'

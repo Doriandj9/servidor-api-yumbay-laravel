@@ -22,12 +22,14 @@ class Autentication {
                 'token' => TokenJWT::encode([$user])
             ];
            }else {
-            $dataEs = Usuarios::allWhitEspecialidades($user->cedula);
+            $dataEs = Usuarios::allWhitEspecialidades($user->cedula,intval($valor));
             if(count($dataEs) <= 0){
                 return false;
             }
+            $user->id_especialidad = $valor;
+            $user->nombre_especialidad = $dataEs->first()->nombre;
             return [
-                'permisos' => intval($valor),
+                'permisos' => intval($dataEs->first()->permisos),
                 'playload' => $user,
                 'token' => TokenJWT::encode([$user])
             ];

@@ -16,20 +16,31 @@ class Usuarios extends Model
 
     protected $fillable = [
         'cedula','nombres','apellidos','direccion','celular',
-        'telefono','email','titulo','horario','contacto_emergencia',
-        'clave','permisos','rol'
+        'telefono','email','titulo','contacto_emergencia','horario',
+        'clave','permisos','rol','imagen'
     ];
 
     /**
      * get especialidad in doctor
      */
-    public static function allWhitEspecialidades(string $cedula) {
+    public static function allWhitEspecialidades(string $cedula,$idEspecialidad) {
        $data = DB::table('usuarios')
         ->join('usuarios_especialidades','usuarios_especialidades.cedula_user','=','usuarios.cedula')
         ->join('especialidades','especialidades.id','=','usuarios_especialidades.id_especialidad')
         ->where('usuarios.cedula',$cedula)
+        ->where('usuarios_especialidades.id_especialidad',$idEspecialidad)
         ->get();
 
+        return $data;
+    }
+
+    public static function allMedicosForEspecialidad (string $idEspecialidad) {
+        $data = DB::table('especialidades')
+        ->join('usuarios_especialidades','usuarios_especialidades.id_especialidad','=','especialidades.id')
+        ->join('usuarios','usuarios_especialidades.cedula_user','=','usuarios.cedula')
+        ->where('especialidades.id',$idEspecialidad)
+        ->get(['usuarios.id as id','usuarios.nombres as nombres','usuarios.apellidos as apellidos',
+        'usuarios.cedula as cedula','usuarios.horario']);
         return $data;
     }
 }

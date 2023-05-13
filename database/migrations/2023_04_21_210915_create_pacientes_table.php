@@ -11,10 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('usuarios_especialidades', function (Blueprint $table) {
+        Schema::create('pacientes', function (Blueprint $table) {
             $table->id();
-            $table->string('cedula_user',10)->nullable();
-            $table->integer('id_especialidad')->nullable();
+            $table->string('cedula',10);
+            $table->text('nombres');
+            $table->text('apellidos');
+            $table->text('direccion');
+            $table->string('celular',10);
+            $table->date('fecha_nacimiento');
+            $table->text('email');
+            $table->text('clave');
             $table->timestamps();
         });
     }
@@ -24,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('usuarios_especialidades');
+        Schema::dropIfExists('pacientes');
     }
 };

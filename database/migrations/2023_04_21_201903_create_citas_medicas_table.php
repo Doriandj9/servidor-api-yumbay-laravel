@@ -11,11 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('usuarios_especialidades', function (Blueprint $table) {
+        Schema::create('citas_medicas', function (Blueprint $table) {
             $table->id();
-            $table->string('cedula_user',10)->nullable();
-            $table->integer('id_especialidad')->nullable();
+            $table->date('fecha');
+            $table->string('hora',11);
+            $table->boolean('pendiente');
+            $table->integer('id_especialidad');
+            $table->string('cedula_paciente',10);
             $table->timestamps();
+
+            //index
+
+            $table->index('fecha','fecha_init');
         });
     }
 
@@ -24,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('usuarios_especialidades');
+        Schema::dropIfExists('citas_medicas');
     }
 };

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\User;
+use App\Models\Especialidades;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     $viewData = [];
     $viewData['title'] = 'Tienda Onlinde | Inicio';
-    return view('welcome')->with('viewData',$viewData);
+    $dato = Especialidades::orderByDesc('created_at')->get();
+    return view('welcome')->with('viewData',$viewData)
+    ->with('especialidades',$dato);
 })->name('inicio');
 
 // Route::get('user/home',User::class . '@index')->name('user.home');
