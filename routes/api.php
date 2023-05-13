@@ -6,6 +6,7 @@ use App\Http\Controllers\FichasMedicas;
 use App\Http\Controllers\Pacientes;
 use App\Http\Controllers\Reportes;
 use App\Http\Controllers\Usuarios;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,3 +41,8 @@ Route::get('/doctor/{doctor}/pacientes/especialidad/{id}',Pacientes::class . '@g
 Route::get('/doctor/fichas/medicas/{cedula}',FichasMedicas::class . '@getForPaciente');
 Route::get('/citas-medicas/agendadas/{cedula}',CitasMedicas::class . '@getForPaciente');
 Route::get('/reportes/{fechaI}/{fechaF}/{especialidad}',Reportes::class .'@reporte');
+Route::get('/storage-link',function (){
+    Artisan::call('storage:link');
+    return response()
+    ->json('Realizado');
+});
