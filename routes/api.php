@@ -41,8 +41,3 @@ Route::get('/doctor/{doctor}/pacientes/especialidad/{id}',Pacientes::class . '@g
 Route::get('/doctor/fichas/medicas/{cedula}',FichasMedicas::class . '@getForPaciente');
 Route::get('/citas-medicas/agendadas/{cedula}',CitasMedicas::class . '@getForPaciente');
 Route::get('/reportes/{fechaI}/{fechaF}/{especialidad}',Reportes::class .'@reporte');
-Route::get('/storage-link',function (){
-    Artisan::call('storage:link');
-    return response()
-    ->json('Realizado');
-});
