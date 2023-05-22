@@ -42,3 +42,4 @@ Route::get('/citas-medicas/agendadas/{cedula}',CitasMedicas::class . '@getForPac
 Route::get('/reportes/{fechaI}/{fechaF}/{especialidad}',Reportes::class .'@reporte');
 Route::post('/change/password',Usuarios::class . '@verifiPassword');
 Route::post('/update/user',Usuarios::class . '@updateInformacion');
+Route::post('/recovery/pass', Usuarios::class . '@recoveryPassword');

@@ -3,15 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserPostRequest;
+use App\Mail\WelcomeEmail;
 use App\Models\Usuarios as ModelsUsuarios;
 use App\Models\UsuariosEspecialidades;
 use App\Utils\Autentication;
 use App\Utils\TokenJWT;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\Mailer\Exception\TransportException;
 
 use function PHPSTORM_META\map;
 
@@ -276,6 +279,50 @@ class Usuarios extends Controller
         ->json([
             'ident' => 0,
             'mensaje' => 'Error, no existe el usuario.'
+        ]);
+    }
+
+
+    public function recoveryPassword(Request $request){
+        $cedula = $request->get('cedula');
+        $user = ModelsUsuarios::where('cedula',$cedula)->get()->first();
+        if($user){
+            $clave = uniqid('FAY');
+            $encypty = password_hash($clave,PASSWORD_DEFAULT);
+            try {
+                $user->clave = $encypty;
+                $user->save();
+                $email = $user->email;
+                try{
+                    Mail::to($email)->send(new WelcomeEmail);
+                }catch(TransportException $e ){
+                    return response()
+                ->json([
+                    'ident' => 0,
+                    'mensaje' => $e->getMessage(),
+                    'contra' => $clave
+                ]);
+                }
+                return response()
+                ->json([
+                    'ident' => 1,
+                    'mensaje' => 'Se envio la contraseña temporal a su correo electronico .('. $user->email . ')',
+                    'contra' => $clave
+                ]);
+            } catch (\PDOException $e) {
+                return response()
+                ->json([
+                    'ident' => 0,
+                    'mensaje' => $e->getMessage()
+                ]);
+            }
+
+        }
+
+        return response()
+        ->json([
+            'ident' => 0,
+            'mensaje' => 'Error, el usuario no existe.'
         ]);
     }
 }
