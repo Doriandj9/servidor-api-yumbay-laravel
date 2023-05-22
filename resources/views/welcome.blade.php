@@ -4,7 +4,7 @@
 @php
    //var_dump($especialidades);
 @endphp
-   <form action="{{ route('aut') }}" method="post">
+   <form action="/api/recovery/pass" method="post">
     <input type="text" name="cedula" value="{{old('name')}}">
     <input type="text" name="clave" value="{{old('clave')}}">
     <input type="text" name="rol" value="{{old('rol')}}">
