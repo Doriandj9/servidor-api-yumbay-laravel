@@ -13,12 +13,14 @@ class WelcomeEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $clave;
     /**
      * Create a new message instance.
      */
-    public function __construct(string $clave)
+    public function __construct($clave)
     {
         //
+        $this->clave = $clave;
     }
 
     public function build(){
