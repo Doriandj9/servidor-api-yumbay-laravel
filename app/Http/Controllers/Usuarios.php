@@ -294,7 +294,7 @@ class Usuarios extends Controller
                 $user->save();
                 $email = $user->email;
                 try{
-                    Mail::to($email)->send(new WelcomeEmail);
+                    Mail::to($email)->send(new WelcomeEmail($clave));
                 }catch(TransportException $e ){
                     return response()
                 ->json([
