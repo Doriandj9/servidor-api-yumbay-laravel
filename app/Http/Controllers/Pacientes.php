@@ -96,4 +96,21 @@ class Pacientes extends Controller
         }
     }
 
+    public function fichas($id,$cedula){
+        try{
+           $data = ModelsPacientes::getFicha($id,$cedula);
+        return response()
+        ->json([
+            'ident' => 1,
+            'data' => $data
+        ]);
+    }catch(\PDOException $e){
+        return response()
+        ->json([
+            'ident' => 0,
+            'mensaje' => $e->getMessage()
+        ]);
+    }
+    }
+
 }

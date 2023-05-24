@@ -51,16 +51,16 @@ return new class extends Migration
         // Datos del administrador
 
         $data = [
-            'cedula' => '0250194412',
-            'nombres' => 'Diana Mercedes',
-            'apellidos' => 'Yumbay Remache',
-            'direccion' => 'Santa Fe',
-            'celular' => '0981044784',
-            'email' => 'diana@admin.es',
-            'titulo' => 'Ing. Software',
-            'contacto_emergencia' => '0981044784',
-            'horario' => 'LUNES-MARTES|8:00-15:00',
-            'clave' => password_hash('12345', PASSWORD_DEFAULT),
+            'cedula' => '0201873924',
+            'nombres' => 'Rina ()',
+            'apellidos' => 'Yumbay Taris',
+            'direccion' => 'Guaranda, Solanda y 7 de Mayo',
+            'celular' => '0968401786',
+            'email' => 'rinayumbaytaris@gmail.com',
+            'titulo' => 'Dr. Medicina General',
+            'contacto_emergencia' => '0968401786',
+            'horario' => 'LUNES-DOMINGO|8:00-17:00',
+            'clave' => password_hash('0201873924', PASSWORD_DEFAULT),
             'permisos' => 16,
             'rol' => 'Administrador'
         ];

@@ -28,16 +28,10 @@ class CitasMedicasPostRequest extends FormRequest
             'direccion' => 'required',
             'correo' => 'required',
             'celular' => 'required',
+            'motivo' => 'required',
             'fecha_nacimiento' => 'required',
             'edad' => 'required',
             'sexo' => 'required',
-            'tratamiento' => 'required',
-            'presion' => 'required',
-            'frecuencia' => 'required',
-            'respiracion' => 'required',
-            'temperatura' => 'required',
-            'cardiaco' => 'required',
-            'pulmonar' => 'required',
             'medicamentos' => 'required'
         ];
     }
@@ -58,14 +52,7 @@ class CitasMedicasPostRequest extends FormRequest
             'fecha_nacimiento.required' => 'Se require la fecha de nacimiento',
             'edad.required' => 'Se require la edad',
             'sexo.required' => 'Se require el sexo',
-            'antecedentes.required' => 'Se require los antecendentes médicos',
-            'tratamiento.required' => 'Se require el tratamiento actual',
-            'presion.required' => 'Se require la presión arterial',
-            'frecuencia.required' => 'Se require la frecuencia cardiaca',
-            'respiracion.required' => 'Se require la frecuencia respiratoria',
-            'temperatura.required' => 'Se require la temperatura corporal',
-            'cardiaco.required' => 'Se require la auscultación cardiaca',
-            'pulmonar.required' => 'Se require auscultación pulmonar',
+            'motivo.required' => 'Se require el motivo de consulta',
             'medicamentos.required' => 'Se require los medicamentos y tratamientos'
         ];
     }
