@@ -45,3 +45,5 @@ Route::post('/change/password',Usuarios::class . '@verifiPassword');
 Route::post('/update/user',Usuarios::class . '@updateInformacion');
 Route::post('/recovery/pass', Usuarios::class . '@recoveryPassword');
 Route::get('/fichas/{id}/{cedula}', Pacientes::class .'@fichas');
+Route::get('/usuarios',Usuarios::class . '@list');
+Route::post('/option/user',Usuarios::class . '@option');

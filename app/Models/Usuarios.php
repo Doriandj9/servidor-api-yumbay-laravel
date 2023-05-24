@@ -15,7 +15,7 @@ class Usuarios extends Model
     public const DOCTOR = 4;
 
     protected $fillable = [
-        'cedula','nombres','apellidos','direccion','celular',
+        'cedula','nombres','apellidos','direccion','celular', 'estado',
         'telefono','email','titulo','contacto_emergencia','horario',
         'clave','permisos','rol','imagen'
     ];

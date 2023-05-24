@@ -104,6 +104,7 @@ class Usuarios extends Controller
                         'celular'=> $request->get('celular'),
                         'email' => $request->get('correo'),
                         'imagen' => $nameImg,
+                        'estado' => true,
                         'horario' => 'LUNES/VIERNES',
                         'contacto_emergencia' =>  'ninguno',
                         'clave' => password_hash($request->get('cedula'),PASSWORD_DEFAULT),
@@ -120,6 +121,7 @@ class Usuarios extends Controller
                         'telefono' => $request->get('telefono'),
                         'celular'=> $request->get('celular'),
                         'email' => $request->get('correo'),
+                        'estado' => true,
                         'titulo' => $request->get('Doctor'),
                         'horario' => $request->get('dias') . '|' . $request->get('hora_ingreso')
                         . '-' . $request->get('hora_salida'),
@@ -323,6 +325,40 @@ class Usuarios extends Controller
         ->json([
             'ident' => 0,
             'mensaje' => 'Error, el usuario no existe.'
+        ]);
+    }
+
+    public function list(){
+        try{
+            $data = ModelsUsuarios::whereRaw('permisos != ?',[ModelsUsuarios::ADMIN])->get();
+            return response()
+                ->json([
+                    'ident' => 1,
+                    'data' => $data
+                ]);
+
+        }catch(\PDOException $e){
+            return response()
+                ->json([
+                    'ident' => 0,
+                    'mensaje' => $e->getMessage()
+                ]);
+        }
+
+
+    }
+    public function option(Request $request){
+        $ids = $request->get('usuarios');
+
+        foreach($ids as $id){
+            $user = ModelsUsuarios::find(intval($id));
+            $user->estado = false;
+            $user->save();
+        }
+        return response()
+        ->json([
+            'ident' => 1,
+            'mensaje' => 'Se actualizo correctamente'
         ]);
     }
 }
