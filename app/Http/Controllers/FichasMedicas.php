@@ -46,7 +46,7 @@ class FichasMedicas extends Controller
                     'cedula_paciente' => $request->get('cedula')
                 ];
                 $dataHistoriaClinica = [
-                    'hora' => $request->get('hora'),
+                    'hora' => '00:00',
                     'motivo_consulta' => $request->get('motivo'),
                     'antecedentes_medicos' => $request->get('antecendentes'),
                     'tratamiento_actual' => $request->get('tratamiento'),

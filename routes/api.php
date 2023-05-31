@@ -47,3 +47,4 @@ Route::post('/recovery/pass', Usuarios::class . '@recoveryPassword');
 Route::get('/fichas/{id}/{cedula}', Pacientes::class .'@fichas');
 Route::get('/usuarios',Usuarios::class . '@list');
 Route::post('/option/user',Usuarios::class . '@option');
+Route::post('/especialidades/edit',Especialidades::class . '@edit');

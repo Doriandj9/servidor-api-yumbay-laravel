@@ -348,12 +348,14 @@ class Usuarios extends Controller
 
     }
     public function option(Request $request){
-        $ids = $request->get('usuarios');
+        $ids = json_decode($request->get('usuarios'),true);
 
-        foreach($ids as $id){
+        foreach($ids['data'] as $id){
             $user = ModelsUsuarios::find(intval($id));
-            $user->estado = false;
-            $user->save();
+            if($user){
+                $user->estado = $user->estado ? false : true;
+                $user->save();
+            }
         }
         return response()
         ->json([

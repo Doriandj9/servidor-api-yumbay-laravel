@@ -10,7 +10,7 @@ class Autentication {
     public static function verifyCredential(string $cedula, string $clave, string $rol){
         $user = Usuarios::where('cedula','=',strtolower(trim($cedula)))->firstOrFail();
 
-        if($user && password_verify($clave,$user->clave)){
+        if($user && password_verify($clave,$user->clave) && $user->estado){
            list($key,$valor) = preg_split('/:/',$rol);
            if($key === 'user' &&
            $user->permisos & intval($valor)

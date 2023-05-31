@@ -62,7 +62,7 @@ class Especialidades extends Controller
                         'img' => asset('/storage/' . $nameImg)
                     ]
                 );
-                
+
                 return response()->json([
                     'ident' => 1,
                     'mensaje' => 'Se ingreso correctamente los datos.'
@@ -85,5 +85,26 @@ class Especialidades extends Controller
 
         return response('',404);
 
+    }
+
+    public function edit(Request $request){
+        $id = $request->get('id');
+        try {
+            $especialidad = ModelsEspecialidades::find(intval($id));
+            $especialidad->nombre = $request->get('nombre');
+            $especialidad->descripcion = $request->get('descripcion');
+            $especialidad->save();
+
+           return response()
+           ->json([
+            'ident' => 1,
+            'mensaje' => 'Se actualizo correctamente.'
+           ]);
+        } catch (\Throwable $ep) {
+            return response()->json([
+                'ident' => 0,
+                'mensaje' => $ep->getMessage()
+            ]);
+        }
     }
 }
