@@ -43,7 +43,7 @@ return new class extends Migration
             'img' => '/imgs/cuidado-dental.png'
         ],
         [
-            'nombre' => 'Medicna general',
+            'nombre' => 'Medicina general',
             'descripcion' => 'Constituye el primer nivel de atención médica y es imprescindible para la prevención, detección, tratamiento y seguimiento de las enfermedades crónicas estabilizadas, responsabilizándose del paciente en su conjunto.',
             'img' => '/imgs/undraw_medicine_b-1-ol.svg'
         ],
