@@ -14,6 +14,7 @@ class FichasMedicas extends Model
     protected $fillable = [
         'cedula','nombres','apellidos','direccion','celular','fecha_nacimiento',
         'email','sexo','edad','estado_civil','fecha_control','hora_finalizacion',
+        'enfermedad_actual','antecedentes',
         'unidad_operativa', 'id_especialidad', 'cedula_paciente'
     ];
 
@@ -26,6 +27,7 @@ class FichasMedicas extends Model
         ->join('historia_clinicas','historia_clinicas.id','=','fichas_medicas_historia_clinicas.id_historia_clinica')
         ->join('fichas_medicas_receta_medicas','fichas_medicas_receta_medicas.id_fichas_medicas','=','fichas_medicas.id')
         ->join('receta_medicas','receta_medicas.id','=','fichas_medicas_receta_medicas.id_receta_medica')
+        // ->orderBy('fichas_medicas.create_at','desc')
         ->where('pacientes.cedula','=',$cedula)
         ->get()
         ;

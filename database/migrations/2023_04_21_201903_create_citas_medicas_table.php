@@ -18,6 +18,7 @@ return new class extends Migration
             $table->boolean('pendiente');
             $table->integer('id_especialidad');
             $table->string('cedula_paciente',10);
+            $table->string('cedula_doctor',10);
             $table->timestamps();
 
             //index

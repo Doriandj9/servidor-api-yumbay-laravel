@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class CitasMedicas extends Model
 {
     use HasFactory;
-    protected $fillable = ['fecha','hora','pendiente','id_especialidad','cedula_paciente'];
+    protected $fillable = ['fecha','hora','pendiente','id_especialidad','cedula_paciente','cedula_doctor'];
 
 
     public static function getCitasMedicasForMedico($cedula,$fecha,$id_especialidad){
@@ -26,14 +26,12 @@ class CitasMedicas extends Model
     }
 
     public static function getDataForEspecialidadAndDoctor($cedula,$id_especialidad){
-        $data = DB::table('usuarios')
-        ->join('usuarios_especialidades','usuarios_especialidades.cedula_user','=','usuarios.cedula')
-        ->join('especialidades','especialidades.id','usuarios_especialidades.id_especialidad')
-        ->join('citas_medicas','citas_medicas.id_especialidad','=','especialidades.id')
-        ->join('pacientes','pacientes.cedula','=','citas_medicas.cedula_paciente')
-        ->where('usuarios.cedula','=',$cedula)
+        $data = DB::table('pacientes')
+        ->join('citas_medicas','citas_medicas.cedula_paciente','=','pacientes.cedula')
+        ->where('citas_medicas.cedula_doctor','=',$cedula)
         ->where('citas_medicas.id_especialidad','=',$id_especialidad)
         ->where('citas_medicas.pendiente','=',true)
+        ->orderBy('citas_medicas.fecha')
         ->get(['citas_medicas.hora as horas',
         'citas_medicas.fecha as fecha',
         'pacientes.nombres as nombres',

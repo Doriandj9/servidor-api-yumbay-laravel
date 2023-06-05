@@ -43,7 +43,8 @@ class CitasMedicas extends Controller
            'hora' =>$request->get('horas'),
            'pendiente' => true,
            'id_especialidad' => intval($request->get('especialidad')),
-           'cedula_paciente' => $request->get('cedula')
+           'cedula_paciente' => $request->get('cedula'),
+           'cedula_doctor' => $request->get('cedula_doctor')
         ];
         try{
             ModelsCitasMedicas::create($data);

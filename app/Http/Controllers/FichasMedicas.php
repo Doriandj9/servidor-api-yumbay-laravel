@@ -41,6 +41,8 @@ class FichasMedicas extends Controller
                     'estado_civil' => $request->get('estado_civil'),
                     'fecha_control' => $request->get('fecha'),
                     'hora_finalizacion' => $request->get('hora_finalizacion'),
+                    'antecedentes' => $request->get('antecedentes_paso'),
+                    'enfermedad_actual' => $request->get('enfermedad_actual'),
                     'unidad_operativa' => $request->get('unidad_operativa'),
                     'id_especialidad' => intval($request->get('id_especialidad')),
                     'cedula_paciente' => $request->get('cedula')
