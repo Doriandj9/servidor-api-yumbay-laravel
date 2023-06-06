@@ -19,6 +19,9 @@ return new class extends Migration
             //$table->primary(['id','id_historia_clinica'],'Pk_historia_clinica');
             $table->unique('id_fichas_medicas','Pk_fichas_medicas');
             $table->timestamps();
+
+            $table->foreign('id_historia_clinica')->references('id')->on('historia_clinicas');
+            $table->foreign('id_fichas_medicas')->references('id')->on('fichas_medicas');
         });
     }
 

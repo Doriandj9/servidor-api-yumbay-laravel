@@ -19,6 +19,9 @@ return new class extends Migration
             //$table->primary(['id','id_receta_medica'],'Pk_recete_medica');
             $table->unique('id_fichas_medicas','Pk_fichas_medicas');
             $table->timestamps();
+
+            $table->foreign('id_receta_medica')->references('id')->on('receta_medicas');
+            $table->foreign('id_fichas_medicas')->references('id')->on('fichas_medicas');
         });
     }
 

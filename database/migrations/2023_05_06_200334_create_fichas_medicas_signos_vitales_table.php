@@ -19,6 +19,10 @@ return new class extends Migration
            // $table->primary(['id','id_signos_vitales']);
             $table->unique('id_fichas_medicas','Pk_fichas_medicas');
             $table->timestamps();
+
+            $table->foreign('id_signos_vitales')->references('id')->on('signos_vitales');
+            $table->foreign('id_fichas_medicas')->references('id')->on('fichas_medicas');
+
         });
     }
 

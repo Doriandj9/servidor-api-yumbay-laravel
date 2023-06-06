@@ -31,6 +31,10 @@ return new class extends Migration
             $table->integer('id_especialidad');
             $table->string('cedula_paciente',10);// foreig key -> pacientes
             $table->timestamps();
+
+            $table->foreign('id_especialidad')->references('id')->on('especialidades');
+            $table->foreign('cedula_paciente')->references('cedula')->on('pacientes');
+
         });
     }
 

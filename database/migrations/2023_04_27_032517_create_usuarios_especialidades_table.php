@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('cedula_user',10)->nullable();
             $table->integer('id_especialidad')->nullable();
             $table->timestamps();
+
+            $table->foreign('id_especialidad')->references('id')->on('especialidades');
         });
     }
 

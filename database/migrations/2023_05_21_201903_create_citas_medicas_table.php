@@ -22,7 +22,9 @@ return new class extends Migration
             $table->timestamps();
 
             //index
-
+            $table->foreign('id_especialidad')->references('id')->on('especialdades');
+            $table->foreign('cedula_paciente')->references('cedula')->on('pacientes');
+            $table->foreign('cedula_doctor')->references('cedula')->on('usuarios');
             $table->index('fecha','fecha_init');
         });
     }
