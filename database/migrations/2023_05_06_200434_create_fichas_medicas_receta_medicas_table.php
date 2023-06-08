@@ -13,15 +13,16 @@ return new class extends Migration
     {
         Schema::create('fichas_medicas_receta_medicas', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_receta_medica');
-            $table->integer('id_fichas_medicas');
+            // $table->integer('id_receta_medica');
+            // $table->integer('id_fichas_medicas');
 
             //$table->primary(['id','id_receta_medica'],'Pk_recete_medica');
             $table->unique('id_fichas_medicas','Pk_fichas_medicas');
             $table->timestamps();
 
-            $table->foreign('id_receta_medica')->references('id')->on('receta_medicas');
-            $table->foreign('id_fichas_medicas')->references('id')->on('fichas_medicas');
+
+            $table->foreignId('id_receta_medica')->constrained(table:'receta_medicas');
+            $table->foreignId('id_fichas_medicas')->constrained(table:'fichas_medicas');
         });
     }
 

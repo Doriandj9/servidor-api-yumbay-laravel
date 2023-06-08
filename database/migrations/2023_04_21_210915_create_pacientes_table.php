@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pacientes', function (Blueprint $table) {
             $table->id();
-            $table->string('cedula',10);
+            $table->string('cedula',10)->unique('uk_cedula');
             $table->text('nombres');
             $table->text('apellidos');
             $table->text('direccion');

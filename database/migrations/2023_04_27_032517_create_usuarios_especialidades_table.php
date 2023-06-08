@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('usuarios_especialidades', function (Blueprint $table) {
             $table->id();
-            $table->string('cedula_user',10)->nullable();
-            $table->integer('id_especialidad')->nullable();
+            $table->string('cedula_user',10);
+            // $table->unsignedBigInteger('id_especialidad');
             $table->timestamps();
-
-            $table->foreign('id_especialidad')->references('id')->on('especialidades');
+            $table->foreign('cedula_user')->references('cedula')->on('usuarios');
+            $table->foreignId('id_especialidad')->constrained(table:'especialidades');
         });
     }
 

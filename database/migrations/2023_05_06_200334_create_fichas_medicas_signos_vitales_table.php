@@ -13,15 +13,16 @@ return new class extends Migration
     {
         Schema::create('fichas_medicas_signos_vitales', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_signos_vitales');
-            $table->integer('id_fichas_medicas');
+            // $table->integer('id_signos_vitales');
+            // $table->integer('id_fichas_medicas');
 
            // $table->primary(['id','id_signos_vitales']);
-            $table->unique('id_fichas_medicas','Pk_fichas_medicas');
             $table->timestamps();
 
-            $table->foreign('id_signos_vitales')->references('id')->on('signos_vitales');
-            $table->foreign('id_fichas_medicas')->references('id')->on('fichas_medicas');
+            $table->foreignId('id_signos_vitales')->constrained(table:'signos_vitales');
+            $table->foreignId('id_fichas_medicas')->constrained(table:'fichas_medicas');
+            $table->unique('id_fichas_medicas','Pk_fichas_medicas');
+
 
         });
     }

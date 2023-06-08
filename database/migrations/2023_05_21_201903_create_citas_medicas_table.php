@@ -16,15 +16,16 @@ return new class extends Migration
             $table->date('fecha');
             $table->string('hora',11);
             $table->boolean('pendiente');
-            $table->integer('id_especialidad');
+            // $table->integer('id_especialidad');
             $table->string('cedula_paciente',10);
             $table->string('cedula_doctor',10);
             $table->timestamps();
 
             //index
-            $table->foreign('id_especialidad')->references('id')->on('especialdades');
             $table->foreign('cedula_paciente')->references('cedula')->on('pacientes');
             $table->foreign('cedula_doctor')->references('cedula')->on('usuarios');
+            $table->foreignId('id_especialidad')->constrained(table:'especialidades');
+
             $table->index('fecha','fecha_init');
         });
     }
