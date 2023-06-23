@@ -10,6 +10,6 @@ class SignosVitales extends Model
     use HasFactory;
     protected $fillable = [
         'talla','peso','temperatura','frecuencia_respiratoria','frecuencia_cardiaca',
-        'presion_arterial','auscultacion_cardiaca','auscultacion_pulmonar','otros_hallazgos'
+        'presion_arterial','otros_hallazgos'
     ];
 }

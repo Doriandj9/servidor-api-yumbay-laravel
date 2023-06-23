@@ -14,7 +14,7 @@ class FichasMedicas extends Model
     protected $fillable = [
         'cedula','nombres','apellidos','direccion','celular','fecha_nacimiento',
         'email','sexo','edad','estado_civil','fecha_control','hora_finalizacion',
-        'enfermedad_actual','antecedentes',
+        'enfermedad_actual','antecedentes', 'odontograma',
         'unidad_operativa', 'id_especialidad', 'cedula_paciente'
     ];
 

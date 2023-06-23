@@ -19,8 +19,8 @@ return new class extends Migration
             $table->text('frecuencia_respiratoria')->nullable();
             $table->text('frecuencia_cardiaca')->nullable();
             $table->text('presion_arterial')->nullable();
-            $table->text('auscultacion_cardiaca')->nullable();
-            $table->text('auscultacion_pulmonar')->nullable();
+            // $table->text('auscultacion_cardiaca')->nullable();
+            // $table->text('auscultacion_pulmonar')->nullable();
             $table->text('otros_hallazgos')->nullable();
             $table->timestamps();
         });

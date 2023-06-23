@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Usuarios as ControllersUsuarios;
 use App\Http\Requests\CitasMedicasPostRequest;
+use App\Models\CitasMedicas;
 use App\Models\FichasMedicas as ModelsFichasMedicas;
 use App\Models\FichasMedicasHistoriaClinica;
 use App\Models\FichasMedicasRecetaMedica;
@@ -10,6 +12,7 @@ use App\Models\FichasMedicasSignosVitales;
 use App\Models\HistoriaClinica;
 use App\Models\RecetaMedica;
 use App\Models\SignosVitales;
+use App\Models\Usuarios;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
@@ -27,6 +30,24 @@ class FichasMedicas extends Controller
                 throw new ValidationException($validator);
             }
             try {
+                $user = Usuarios::where('cedula',$request->get('cedula'))->get()->first();
+                if(!$user){
+                    $usuarios= new Pacientes;
+                    $res = $usuarios->save($request,false);
+                    if($res){
+                        date_default_timezone_set('America/Guayaquil');
+                        $date = new \DateTime();
+                        $data = [
+                            'fecha' => $date->format('Y-m-d'),
+                            'hora' => '00:00|00:00',
+                            'pendiente' => false,
+                            'id_especialidad' => intval($request->get('id_especialidad')),
+                            'cedula_paciente' => $request->get('cedula'),
+                            'cedula_doctor' => $request->get('cedula_doctor')
+                         ];
+                         CitasMedicas::create($data);
+                    }
+                }
 
                 $dataFicha = [
                     'cedula' => $request->get('cedula'),
@@ -44,9 +65,11 @@ class FichasMedicas extends Controller
                     'antecedentes' => $request->get('antecedentes_paso'),
                     'enfermedad_actual' => $request->get('enfermedad_actual'),
                     'unidad_operativa' => $request->get('unidad_operativa'),
+                    'odontograma' => $request->get('odontograma'),
                     'id_especialidad' => intval($request->get('id_especialidad')),
                     'cedula_paciente' => $request->get('cedula')
                 ];
+
                 $dataHistoriaClinica = [
                     'hora' => '00:00',
                     'motivo_consulta' => $request->get('motivo'),
@@ -64,8 +87,8 @@ class FichasMedicas extends Controller
                     'frecuencia_respiratoria' => $request->get('respiracion'),
                     'frecuencia_cardiaca' => $request->get('frecuencia'),
                     'presion_arterial' => $request->get('presion'),
-                    'auscultacion_cardiaca' => $request->get('cardiaco'),
-                    'auscultacion_pulmonar' => $request->get('pulmonar'),
+                    // 'auscultacion_cardiaca' => $request->get('cardiaco'),
+                    // 'auscultacion_pulmonar' => $request->get('pulmonar'),
                     'otros_hallazgos' => $request->get('otros_hallasgos')
                 ];
                 $dataRecetaMedica = [

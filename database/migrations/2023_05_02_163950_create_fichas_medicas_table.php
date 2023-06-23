@@ -26,9 +26,9 @@ return new class extends Migration
             $table->date('fecha_control');
             $table->string('hora_finalizacion',10);
             $table->text('unidad_operativa');
-            $table->text('antecedentes');
-            $table->text('enfermedad_actual');
-            // $table->integer('id_especialidad');
+            $table->text('antecedentes')->nullable();
+            $table->text('enfermedad_actual')->nullable();
+            $table->text('odontograma')->nullable();
             $table->string('cedula_paciente',10);// foreig key -> pacientes
             $table->timestamps();
 
