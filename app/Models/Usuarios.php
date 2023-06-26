@@ -39,6 +39,7 @@ class Usuarios extends Model
         ->join('usuarios_especialidades','usuarios_especialidades.id_especialidad','=','especialidades.id')
         ->join('usuarios','usuarios_especialidades.cedula_user','=','usuarios.cedula')
         ->where('especialidades.id',$idEspecialidad)
+        ->where('usuarios.estado',true)
         ->get(['usuarios.id as id','usuarios.nombres as nombres','usuarios.apellidos as apellidos',
         'usuarios.cedula as cedula','usuarios.horario']);
         return $data;
